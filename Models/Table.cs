@@ -1,4 +1,4 @@
-namespace RestaurantReservationSystem.Api.Models
+namespace RestaurantReservationSystem.Mvc.Models
 {
     public class Table
     {

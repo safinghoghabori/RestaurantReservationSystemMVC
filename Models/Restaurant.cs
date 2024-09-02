@@ -1,7 +1,7 @@
 using System.Linq;
-using RestaurantReservationSystem.Api.Exceptions;
+using RestaurantReservationSystem.Mvc.Exceptions;
 
-namespace RestaurantReservationSystem.Api.Models
+namespace RestaurantReservationSystem.Mvc.Models
 {
     public class Restaurant
     {
