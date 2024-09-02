@@ -26,8 +26,9 @@ public class RestaurantService : IRestaurantService
         return await response.Content.ReadFromJsonAsync<List<Customer>>();
     }
 
-    public async Task<List<Table>> GetTablesAsync()
+    public async Task<List<Table>> GetTablesAsync(string token)
     {
+        AddAuthorizationHeader(token);
         var response = await _httpClient.GetAsync("restaurant/tables");
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<List<Table>>();
