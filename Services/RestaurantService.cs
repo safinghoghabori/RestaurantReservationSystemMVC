@@ -47,8 +47,9 @@ public class RestaurantService : IRestaurantService
         response.EnsureSuccessStatusCode();
     }
 
-    public async Task AddTableAsync(Table table)
+    public async Task AddTableAsync(string token, Table table)
     {
+        AddAuthorizationHeader(token);
         var response = await _httpClient.PostAsJsonAsync("restaurant/tables", table);
         response.EnsureSuccessStatusCode();
     }

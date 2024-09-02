@@ -23,4 +23,22 @@ public class TablesController : Controller
         var tables = await _restaurantService.GetTablesAsync(token);
         return View(tables);
     }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(Table table)
+    {
+        if (ModelState.IsValid)
+        {
+            var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+            await _restaurantService.AddTableAsync(token, table);
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View();
+    }
 }

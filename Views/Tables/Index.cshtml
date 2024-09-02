@@ -4,14 +4,15 @@
     ViewData["Title"] = "Tables Data";
 }
 
+<button type="submit" class="btn btn-primary mb-3" onclick="handleAddTable()">Add Table</button>
+
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Phone Number</th>
-            <th>Age</th>
-            <th>Gender</th>
+            <th>Capacity</th>
+            <th>Cost</th>
+            <th>Is table reserved?</th>
             <th colspan="2"></th>
         </tr>
     </thead>
@@ -22,11 +23,17 @@
                 <td>@table.TableId</td>
                 <td>@table.Capacity</td>
                 <td>@table.Cost</td>
-                <td>@table.IsReserved</td>
+                <td>@(table.IsReserved ? "Yes" : "No")</td>
                 <td><a asp-action="Update" asp-route-id="@table.TableId">Edit</a></td>
                 <td><a asp-action="Delete" asp-route-id="@table.TableId">Delete</a></td>
             </tr>
         }
     </tbody>
 </table>
+
+<script>
+    const handleAddTable = () => {
+        window.location.href = '@Url.Action("Create", "Tables")';
+    }
+</script>
     
