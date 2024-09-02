@@ -1,0 +1,39 @@
+
+@using RestaurantReservationSystem.Mvc.Models;
+
+@{
+    ViewData["Title"] = "Customers Data";
+}
+@model Customer
+
+<form action="~/Customers/Create" method="post">
+    <fieldset>
+        <div>
+            <label>Id</label>
+            <input type="number" asp-for="CustomerId">
+        </div>
+        <div>
+            <label>Name</label>
+            <input type="text" asp-for="Name">
+        </div>
+        <div>
+            <label>Phone Number</label>
+            <input type="text" asp-for="PhoneNumber">
+        </div>
+        <div>
+            <label>Age</label>
+            <input type="number" asp-for="Age">
+        </div>
+        <div>
+            <label>Gender</label>
+            <select asp-for="Gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </fieldset>
+</form>

@@ -1,5 +1,6 @@
 using RestaurantReservationSystem.Mvc.Models;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 
 public class RestaurantService : IRestaurantService
 {
@@ -26,6 +27,19 @@ public class RestaurantService : IRestaurantService
         return await response.Content.ReadFromJsonAsync<List<Customer>>();
     }
 
+    public async Task<Customer> GetCustomerById(int id, string token)
+    {
+        var customers = await GetCustomersAsync(token);
+        return customers.Where(customer => customer.CustomerId == id).FirstOrDefault();
+    }
+
+    public async Task UpdateCustomerAsync(Customer customer, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.PutAsJsonAsync($"restaurant/customers/{customer.CustomerId}", customer);
+        response.EnsureSuccessStatusCode();
+    }
+
     public async Task<List<Table>> GetTablesAsync()
     {
         var response = await _httpClient.GetAsync("restaurant/tables");
@@ -40,8 +54,9 @@ public class RestaurantService : IRestaurantService
         return await response.Content.ReadFromJsonAsync<List<Reservation>>();
     }
 
-    public async Task AddCustomerAsync(Customer customer)
+    public async Task AddCustomerAsync(Customer customer, string token)
     {
+        AddAuthorizationHeader(token);
         var response = await _httpClient.PostAsJsonAsync("restaurant/customers", customer);
         response.EnsureSuccessStatusCode();
     }
