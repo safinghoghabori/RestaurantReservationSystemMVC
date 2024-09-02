@@ -1,0 +1,50 @@
+using RestaurantReservationSystem.Mvc.Models;
+
+public class RestaurantService : IRestaurantService
+{
+    private readonly HttpClient _httpClient;
+
+    public RestaurantService(IHttpClientFactory httpClientFactory)
+    {
+        _httpClient = httpClientFactory.CreateClient("RestaurantApi");
+    }
+
+    public async Task<List<Customer>> GetCustomersAsync()
+    {
+        var response = await _httpClient.GetAsync("restaurant/customers");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<Customer>>();
+    }
+
+    public async Task<List<Table>> GetTablesAsync()
+    {
+        var response = await _httpClient.GetAsync("restaurant/tables");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<Table>>();
+    }
+
+    public async Task<List<Reservation>> GetReservationsAsync()
+    {
+        var response = await _httpClient.GetAsync("restaurant/reservations");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<Reservation>>();
+    }
+
+    public async Task AddCustomerAsync(Customer customer)
+    {
+        var response = await _httpClient.PostAsJsonAsync("restaurant/customers", customer);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task AddTableAsync(Table table)
+    {
+        var response = await _httpClient.PostAsJsonAsync("restaurant/tables", table);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task MakeReservationAsync(Reservation reservation)
+    {
+        var response = await _httpClient.PostAsJsonAsync("restaurant/reservations", reservation);
+        response.EnsureSuccessStatusCode();
+    }
+}
