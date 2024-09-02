@@ -1,0 +1,33 @@
+@using RestaurantReservationSystem.Mvc.Models;
+@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Customers Data";
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Customer customer in Model)
+        {
+            <tr>
+                <td>@customer.CustomerId</td>
+                <td>@customer.Name</td>
+                <td>@customer.PhoneNumber</td>
+                <td>@customer.Age</td>
+                <td>@customer.Gender</td>
+                <td><a asp-action="Update" asp-route-id="@customer.CustomerId">Edit</a></td>
+                <td><a asp-action="Delete" asp-route-id="@customer.CustomerId">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+    

@@ -6,14 +6,23 @@ internal class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        builder.Services.AddHttpContextAccessor();
 
         builder.Services.AddHttpClient("RestaurantApi", client =>
         {
-            client.BaseAddress = new Uri("https://localhost:5001/api/");
+            client.BaseAddress = new Uri("http://localhost:5106/api/");
         });
 
         builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
+        builder.Services.AddDistributedMemoryCache();
+
+        builder.Services.AddSession(options =>
+        {
+            options.IdleTimeout = TimeSpan.FromMinutes(30);
+            options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
+        });
 
         var app = builder.Build();
 
@@ -27,6 +36,7 @@ internal class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+        app.UseSession();
 
         app.UseRouting();
 

@@ -1,4 +1,5 @@
 using RestaurantReservationSystem.Mvc.Models;
+using System.Net.Http.Headers;
 
 public class RestaurantService : IRestaurantService
 {
@@ -9,8 +10,17 @@ public class RestaurantService : IRestaurantService
         _httpClient = httpClientFactory.CreateClient("RestaurantApi");
     }
 
-    public async Task<List<Customer>> GetCustomersAsync()
+    private void AddAuthorizationHeader(string token)
     {
+        if (!string.IsNullOrEmpty(token))
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
+    }
+
+    public async Task<List<Customer>> GetCustomersAsync(string token)
+    {
+        AddAuthorizationHeader(token);
         var response = await _httpClient.GetAsync("restaurant/customers");
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<List<Customer>>();
