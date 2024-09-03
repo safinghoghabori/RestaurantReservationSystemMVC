@@ -49,7 +49,7 @@ public class AccountController : Controller
             // Save the JWT in the session
             _httpContextAccessor.HttpContext.Session.SetString("JwtToken", jwt);
 
-            return RedirectToAction("Index", "Customers");
+            return RedirectToAction("Home", "Home");
         }
 
         ModelState.AddModelError(string.Empty, "Invalid login attempt.");
