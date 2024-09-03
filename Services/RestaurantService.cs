@@ -30,9 +30,8 @@ public class RestaurantService : IRestaurantService
 
     public async Task<Customer> GetCustomerById(int id, string token)
     {
-        AddAuthorizationHeader(token);
-        var response = await _httpClient.GetAsync($"restaurant/customers/{id}");
-        response.EnsureSuccessStatusCode();
+        var customers = await GetCustomersAsync(token);
+        return customers.Where(customers => customers.CustomerId == id).FirstOrDefault();
     }
 
     public async Task<List<Table>> GetTablesAsync(string token)
@@ -42,15 +41,6 @@ public class RestaurantService : IRestaurantService
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<List<Table>>();
     }
-
-    public async Task<List<Reservation>> GetReservationsAsync()
-    {
-        var response = await _httpClient.GetAsync("restaurant/reservations");
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<List<Reservation>>();
-        return await response.Content.ReadFromJsonAsync<Customer>();
-    }
-
     public async Task AddCustomerAsync(Customer customer, string token)
     {
         AddAuthorizationHeader(token);
@@ -73,14 +63,7 @@ public class RestaurantService : IRestaurantService
     }
 
     // Table-related methods
-    public async Task<List<Table>> GetTablesAsync()
-    {
-        var response = await _httpClient.GetAsync("restaurant/tables");
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<List<Table>>();
-    }
-
-    public async Task AddTableAsync(Table table)
+    public async Task AddTableAsync(string token, Table table)
     {
         AddAuthorizationHeader(token);
         var response = await _httpClient.PostAsJsonAsync("restaurant/tables", table);

@@ -14,12 +14,7 @@ public interface IRestaurantService
     Task<Table> GetTableById(int id, string token);
     Task UpdateTable(Table table, string token);
     Task DeleteTable(int id, string token);
-    Task<List<Reservation>> GetReservationsAsync();
     Task DeleteCustomerAsync(int id, string token);
-
-    // Table-related methods
-    Task<List<Table>> GetTablesAsync();
-    Task AddTableAsync(Table table);
 
     // Reservation-related methods
     Task<List<Reservation>> GetReservationsAsync(string token);

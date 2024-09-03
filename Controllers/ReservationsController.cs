@@ -36,7 +36,7 @@ namespace RestaurantReservationSystem.Mvc.Controllers
             }
 
             ViewBag.Customers = await _restaurantService.GetCustomersAsync(token);
-            ViewBag.Tables = await _restaurantService.GetTablesAsync();
+            ViewBag.Tables = await _restaurantService.GetTablesAsync(token);
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace RestaurantReservationSystem.Mvc.Controllers
             }
 
             ViewBag.Customers = await _restaurantService.GetCustomersAsync(token);
-            ViewBag.Tables = await _restaurantService.GetTablesAsync();
+            ViewBag.Tables = await _restaurantService.GetTablesAsync(token);
             return View(reservation);
         }
 
@@ -76,7 +76,7 @@ namespace RestaurantReservationSystem.Mvc.Controllers
             }
 
             ViewBag.Customers = await _restaurantService.GetCustomersAsync(token);
-            ViewBag.Tables = await _restaurantService.GetTablesAsync();
+            ViewBag.Tables = await _restaurantService.GetTablesAsync(token);
             return View(reservation);
         }
 
@@ -96,7 +96,7 @@ namespace RestaurantReservationSystem.Mvc.Controllers
             }
 
             ViewBag.Customers = await _restaurantService.GetCustomersAsync(token);
-            ViewBag.Tables = await _restaurantService.GetTablesAsync();
+            ViewBag.Tables = await _restaurantService.GetTablesAsync(token);
             return View(reservation);
         }
 
