@@ -54,6 +54,18 @@ public class RestaurantService : IRestaurantService
         response.EnsureSuccessStatusCode();
     }
 
+    public async Task<Table> GetTableById(int id, string token)
+    {
+        var tables = await GetTablesAsync(token);
+        return tables.FirstOrDefault(tab => tab.TableId == id);
+    }
+
+    public async Task UpdateTable(Table table, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.PutAsJsonAsync("restaurant/tables", table);
+    }
+
     public async Task MakeReservationAsync(Reservation reservation)
     {
         var response = await _httpClient.PostAsJsonAsync("restaurant/reservations", reservation);

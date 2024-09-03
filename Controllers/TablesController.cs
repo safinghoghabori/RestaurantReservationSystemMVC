@@ -41,4 +41,34 @@ public class TablesController : Controller
 
         return View();
     }
+
+    public async Task<IActionResult> Update(int id)
+    {
+        var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+        if (string.IsNullOrEmpty(token))
+        {
+            return RedirectToAction(nameof(Login), "Account");
+        }
+
+        var table = await _restaurantService.GetTableById(id, token);
+        return View(table);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Update(Table table)
+    {
+        var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+        if (string.IsNullOrEmpty(token))
+        {
+            return RedirectToAction(nameof(Login), "Account");
+        }
+
+        if (ModelState.IsValid)
+        {
+            await _restaurantService.UpdateTable(table, token);
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(table);
+    }
 }
