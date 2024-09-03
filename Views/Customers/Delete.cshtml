@@ -1,0 +1,35 @@
+@model Customer
+@using RestaurantReservationSystem.Mvc.Models
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+
+<h2>Delete Customer</h2>
+
+<form asp-action="Delete" method="post">
+    <fieldset>
+        <div>
+            <label>Id</label>
+            <input type="number" asp-for="CustomerId" readonly>
+        </div>
+        <div>
+            <label>Name</label>
+            <input type="text" asp-for="Name" readonly>
+        </div>
+        <div>
+            <label>Phone Number</label>
+            <input type="text" asp-for="PhoneNumber" readonly>
+        </div>
+        <div>
+            <label>Age</label>
+            <input type="number" asp-for="Age" readonly>
+        </div>
+        <div>
+            <label>Gender</label>
+            <input type="text" asp-for="Gender" readonly>
+        </div>
+        <div>
+            <button type="submit">Delete</button>
+        </div>
+    </fieldset>
+</form>

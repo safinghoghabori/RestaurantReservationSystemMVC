@@ -72,4 +72,10 @@ public class RestaurantService : IRestaurantService
         var response = await _httpClient.PostAsJsonAsync("restaurant/reservations", reservation);
         response.EnsureSuccessStatusCode();
     }
+     public async Task DeleteCustomerAsync(int id, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.DeleteAsync($"restaurant/customers/{id}");
+        response.EnsureSuccessStatusCode();
+    }
 }

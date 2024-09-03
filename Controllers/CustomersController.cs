@@ -92,4 +92,44 @@ public async Task<IActionResult> Edit(Customer customer)
     return View(customer);
 }
 
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+        if (string.IsNullOrEmpty(token))
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        var customer = await _restaurantService.GetCustomerById(id, token);
+        if (customer == null)
+        {
+            return NotFound();
+        }
+
+        return View(customer);
+    }
+
+    // POST: Delete Customer
+    [HttpPost]
+    public async Task<IActionResult> Delete(Customer customer)
+    {
+        var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+        if (string.IsNullOrEmpty(token))
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        var existingCustomer = await _restaurantService.GetCustomerById(customer.CustomerId, token);
+        if (existingCustomer == null)
+        {
+            return NotFound();
+        }
+
+        await _restaurantService.DeleteCustomerAsync(customer.CustomerId, token);
+        return RedirectToAction(nameof(Index));
+    }
 }
+
+
+

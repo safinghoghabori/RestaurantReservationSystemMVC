@@ -12,5 +12,6 @@ public interface IRestaurantService
     Task AddCustomerAsync(Customer customer, string token); 
     Task AddTableAsync(Table table);
     Task MakeReservationAsync(Reservation reservation);
+    Task DeleteCustomerAsync(int id, string token);
 }
 

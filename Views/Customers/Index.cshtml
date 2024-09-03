@@ -4,15 +4,59 @@
     ViewData["Title"] = "Customers Data";
 }
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+    }
+
+    table {
+        width: 80%;
+        margin: 50px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Phone Number</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th colspan="2"></th>
+            <th style="background-color: #4CAF50; color: white;">Id</th>
+            <th style="background-color: #4CAF50; color: white;">Name</th>
+            <th style="background-color: #4CAF50; color: white;">Phone Number</th>
+            <th style="background-color: #4CAF50; color: white;">Age</th>
+            <th style="background-color: #4CAF50; color: white;">Gender</th>
+            <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
         </tr>
     </thead>
     <tbody>
@@ -30,4 +74,4 @@
         }
     </tbody>
 </table>
-    
+<a asp-action="Create" class="btn btn-primary">Create New Customer</a>
