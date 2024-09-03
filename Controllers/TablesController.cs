@@ -71,4 +71,12 @@ public class TablesController : Controller
 
         return View(table);
     }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+        await _restaurantService.DeleteTable(id, token);
+        return RedirectToAction(nameof(Index));
+    }
+
 }

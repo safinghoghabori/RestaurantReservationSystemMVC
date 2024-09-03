@@ -66,6 +66,12 @@ public class RestaurantService : IRestaurantService
         var response = await _httpClient.PutAsJsonAsync("restaurant/tables", table);
     }
 
+    public async Task DeleteTable(int id, string token)
+    {
+        AddAuthorizationHeader(token);
+        await _httpClient.DeleteAsync($"restaurant/tables/{id}");
+    }
+
     public async Task MakeReservationAsync(Reservation reservation)
     {
         var response = await _httpClient.PostAsJsonAsync("restaurant/reservations", reservation);
