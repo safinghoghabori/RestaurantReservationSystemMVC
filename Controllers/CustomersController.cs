@@ -63,37 +63,8 @@ public class CustomersController : Controller
         return View(customer);
     }
 
-[HttpPost]
-public async Task<IActionResult> Edit(Customer customer)
-{
-    var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
-    if (string.IsNullOrEmpty(token))
-    {
-        return RedirectToAction("Login", "Account");
-    }
-
-    if (ModelState.IsValid)
-    {
-        var existingCustomer = await _restaurantService.GetCustomerById(customer.CustomerId, token);
-        if (existingCustomer == null)
-        {
-            return NotFound();
-        }
-
-        existingCustomer.Name = customer.Name;
-        existingCustomer.PhoneNumber = customer.PhoneNumber;
-        existingCustomer.Age = customer.Age;
-        existingCustomer.Gender = customer.Gender;
-
-        await _restaurantService.UpdateCustomerAsync(existingCustomer, token);
-        return RedirectToAction(nameof(Index));
-    }
-
-    return View(customer);
-}
-
-    [HttpGet]
-    public async Task<IActionResult> Delete(int id)
+    [HttpPost]
+    public async Task<IActionResult> Edit(Customer customer)
     {
         var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
         if (string.IsNullOrEmpty(token))
@@ -101,32 +72,30 @@ public async Task<IActionResult> Edit(Customer customer)
             return RedirectToAction("Login", "Account");
         }
 
-        var customer = await _restaurantService.GetCustomerById(id, token);
-        if (customer == null)
+        if (ModelState.IsValid)
         {
-            return NotFound();
+            var existingCustomer = await _restaurantService.GetCustomerById(customer.CustomerId, token);
+            if (existingCustomer == null)
+            {
+                return NotFound();
+            }
+
+            existingCustomer.Name = customer.Name;
+            existingCustomer.PhoneNumber = customer.PhoneNumber;
+            existingCustomer.Age = customer.Age;
+            existingCustomer.Gender = customer.Gender;
+
+            await _restaurantService.UpdateCustomerAsync(existingCustomer, token);
+            return RedirectToAction(nameof(Index));
         }
 
         return View(customer);
     }
-
     // POST: Delete Customer
-    [HttpPost]
-    public async Task<IActionResult> Delete(Customer customer)
+    public async Task<IActionResult> Delete(int id)
     {
         var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
-        if (string.IsNullOrEmpty(token))
-        {
-            return RedirectToAction("Login", "Account");
-        }
-
-        var existingCustomer = await _restaurantService.GetCustomerById(customer.CustomerId, token);
-        if (existingCustomer == null)
-        {
-            return NotFound();
-        }
-
-        await _restaurantService.DeleteCustomerAsync(customer.CustomerId, token);
+        await _restaurantService.DeleteCustomerAsync(id, token);
         return RedirectToAction(nameof(Index));
     }
 }
