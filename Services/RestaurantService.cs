@@ -40,8 +40,9 @@ public class RestaurantService : IRestaurantService
         response.EnsureSuccessStatusCode();
     }
 
-    public async Task<List<Table>> GetTablesAsync()
+    public async Task<List<Table>> GetTablesAsync(string token)
     {
+        AddAuthorizationHeader(token);
         var response = await _httpClient.GetAsync("restaurant/tables");
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<List<Table>>();
@@ -61,10 +62,29 @@ public class RestaurantService : IRestaurantService
         response.EnsureSuccessStatusCode();
     }
 
-    public async Task AddTableAsync(Table table)
+    public async Task AddTableAsync(string token, Table table)
     {
+        AddAuthorizationHeader(token);
         var response = await _httpClient.PostAsJsonAsync("restaurant/tables", table);
         response.EnsureSuccessStatusCode();
+    }
+
+    public async Task<Table> GetTableById(int id, string token)
+    {
+        var tables = await GetTablesAsync(token);
+        return tables.FirstOrDefault(tab => tab.TableId == id);
+    }
+
+    public async Task UpdateTable(Table table, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.PutAsJsonAsync("restaurant/tables", table);
+    }
+
+    public async Task DeleteTable(int id, string token)
+    {
+        AddAuthorizationHeader(token);
+        await _httpClient.DeleteAsync($"restaurant/tables/{id}");
     }
 
     public async Task MakeReservationAsync(Reservation reservation)
@@ -72,7 +92,7 @@ public class RestaurantService : IRestaurantService
         var response = await _httpClient.PostAsJsonAsync("restaurant/reservations", reservation);
         response.EnsureSuccessStatusCode();
     }
-     public async Task DeleteCustomerAsync(int id, string token)
+    public async Task DeleteCustomerAsync(int id, string token)
     {
         AddAuthorizationHeader(token);
         var response = await _httpClient.DeleteAsync($"restaurant/customers/{id}");
