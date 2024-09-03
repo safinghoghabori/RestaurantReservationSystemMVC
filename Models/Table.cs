@@ -1,11 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace RestaurantReservationSystem.Mvc.Models
 {
     public class Table
     {
-        public int TableId { get; set; }
-        public int Capacity { get; set; }
-        public int Cost { get; set; }
-        public bool IsReserved { get; set; }
+        [Required(ErrorMessage = "Table id cant be empty!")]
+        public int? TableId { get; set; }
+        [Required(ErrorMessage = "Capacity cant be empty!")]
+        public int? Capacity { get; set; }
+        [Required(ErrorMessage = "Cost cant be empty!")]
+        public int? Cost { get; set; }
+        public bool IsReserved { get; set; } = false;
     }
 
     public class VipTable : Table

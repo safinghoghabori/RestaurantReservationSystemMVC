@@ -1,0 +1,39 @@
+@using RestaurantReservationSystem.Mvc.Models;
+@model IEnumerable<Table>
+@{
+    ViewData["Title"] = "Tables Data";
+}
+
+<button type="submit" class="btn btn-primary mb-3" onclick="handleAddTable()">Add Table</button>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Capacity</th>
+            <th>Cost</th>
+            <th>Is table reserved?</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Table table in Model)
+        {
+            <tr>
+                <td>@table.TableId</td>
+                <td>@table.Capacity</td>
+                <td>@table.Cost</td>
+                <td>@(table.IsReserved ? "Yes" : "No")</td>
+                <td><a asp-action="Update" asp-route-id="@table.TableId">Edit</a></td>
+                <td><a asp-action="Delete" asp-route-id="@table.TableId">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    const handleAddTable = () => {
+        window.location.href = '@Url.Action("Create", "Tables")';
+    }
+</script>
+    
