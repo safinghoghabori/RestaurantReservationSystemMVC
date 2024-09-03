@@ -1,0 +1,95 @@
+@using RestaurantReservationSystem.Mvc.Models;
+
+@{
+    ViewData["Title"] = "Customer Data";
+}
+@model Customer
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    fieldset {
+        border: none;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    div {
+        margin-bottom: 15px;
+    }
+</style>
+
+<form action="~/Customers/Edit" method="post">
+    <fieldset>
+        <div>
+            <label>Id</label>
+            <input type="number" asp-for="CustomerId" readonly>
+        </div>
+        <div>
+            <label>Name</label>
+            <input type="text" asp-for="Name">
+        </div>
+        <div>
+            <label>Phone Number</label>
+            <input type="text" asp-for="PhoneNumber">
+        </div>
+        <div>
+            <label>Age</label>
+            <input type="number" asp-for="Age">
+        </div>
+        <div>
+            <label>Gender</label>
+            <select asp-for="Gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </fieldset>
+</form>
