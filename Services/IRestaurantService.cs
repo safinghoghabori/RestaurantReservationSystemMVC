@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 public interface IRestaurantService
 {
+    // Customer-related methods
     Task<List<Customer>> GetCustomersAsync(string token);
     Task<Customer> GetCustomerById(int id, string token);
     Task UpdateCustomerAsync(Customer customer, string token);
@@ -14,7 +15,18 @@ public interface IRestaurantService
     Task UpdateTable(Table table, string token);
     Task DeleteTable(int id, string token);
     Task<List<Reservation>> GetReservationsAsync();
-    Task MakeReservationAsync(Reservation reservation);
     Task DeleteCustomerAsync(int id, string token);
+
+    // Table-related methods
+    Task<List<Table>> GetTablesAsync();
+    Task AddTableAsync(Table table);
+
+    // Reservation-related methods
+    Task<List<Reservation>> GetReservationsAsync(string token);
+    Task<Reservation> GetReservationById(int id, string token);
+    Task AddReservationAsync(Reservation reservation, string token);
+    Task UpdateReservationAsync(Reservation reservation, string token);
+    Task DeleteReservationAsync(int id, string token);
 }
+
 
