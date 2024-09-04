@@ -14,4 +14,11 @@
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
+
+    @if (ViewData.ModelState.ContainsKey("ApiError"))
+    {
+        <div class="alert alert-danger mt-2" role="alert">
+            <li>@ViewData.ModelState["ApiError"].Errors.FirstOrDefault()?.ErrorMessage</li>
+        </div>
+    }
 </form>
