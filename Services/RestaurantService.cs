@@ -99,10 +99,9 @@ public class RestaurantService : IRestaurantService
 
     public async Task<Reservation> GetReservationById(int id, string token)
     {
-        AddAuthorizationHeader(token);
-        var response = await _httpClient.GetAsync($"restaurant/reservations/{id}");
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<Reservation>();
+        var reservations = await GetReservationsAsync(token);
+        var reservation = reservations.FirstOrDefault(res => res.ReservationId == id);
+        return reservation;
     }
 
     public async Task AddReservationAsync(Reservation reservation, string token)
