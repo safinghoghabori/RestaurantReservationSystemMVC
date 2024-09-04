@@ -75,20 +75,20 @@
         </div>
         <div>
             <label>Customer</label>
-            <select asp-for="Customer.CustomerId">
+            <select asp-for="CustomerId">
                 @foreach (var customer in (IEnumerable<Customer>)ViewBag.Customers)
                 {
-                    <option value="@customer.CustomerId" selected=@(customer.CustomerId == Model.Customer.CustomerId ?
+                    <option value="@customer.CustomerId" selected=@(customer.CustomerId == Model.CustomerId ?
                     "selected" : "")>@customer.Name</option>
                 }
             </select>
         </div>
         <div>
             <label>Table</label>
-            <select asp-for="Table.TableId">
+            <select asp-for="TableId">
                 @foreach (var table in (IEnumerable<Table>)ViewBag.Tables)
                 {
-                    <option value="@table.TableId" selected=@(table.TableId == Model.Table.TableId ? "selected" : "")>Table
+                    <option value="@table.TableId" selected=@(table.TableId == Model.TableId ? "selected" : "")>Table
                         @table.TableId</option>
                 }
             </select>

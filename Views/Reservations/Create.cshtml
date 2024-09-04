@@ -75,7 +75,7 @@
         </div>
         <div>
             <label>Customer</label>
-            <select asp-for="Customer.CustomerId">
+            <select asp-for="CustomerId">
                 @* Assuming you have a list of customers in the ViewBag *@
                 @foreach (var customer in ViewBag.Customers)
                 {
@@ -85,7 +85,7 @@
         </div>
         <div>
             <label>Table</label>
-            <select asp-for="Table.TableId">
+            <select asp-for="TableId">
                 @* Assuming you have a list of tables in the ViewBag *@
                 @foreach (var table in ViewBag.Tables)
                 {
