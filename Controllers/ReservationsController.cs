@@ -60,7 +60,6 @@ namespace RestaurantReservationSystem.Mvc.Controllers
             return View(reservation);
         }
 
-        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
