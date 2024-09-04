@@ -64,7 +64,7 @@
         {
             <tr>
                 <td>@reservation.ReservationId</td>
-                <td>@reservation.DateTime.ToString("g")</td>
+                <td>@reservation.DateTime?.ToString("g")</td>
                 <td>@reservation.CustomerId</td>
                 <td>@reservation.TableId</td>
                 <td><a asp-action="Edit" asp-route-id="@reservation.ReservationId">Edit</a></td>
