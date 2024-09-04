@@ -1,6 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using RestaurantReservationSystem.Mvc.Models;
 
+
+/// <summary>
+    /// The TablesController class manages table-related operations such as listing, creating, updating, and deleting tables.
+    /// It uses IRestaurantService to interact with the backend and IHttpContextAccessor to manage session data. 
+    /// Index: Retrieves and displays a list of tables. Redirects to login if the JWT token is missing.
+    /// Create (GET): Displays the form to create a new table.
+    /// Create (POST): Adds a new table if the model state is valid. Redirects to login if the JWT token is missing.
+    /// Update (GET): Retrieves and displays the table details for updating. Redirects to login if the JWT token is missing.
+    /// Update (POST): Updates the table details if the model state is valid. Redirects to login if the JWT token is missing.
+    /// Delete: Deletes a table by its ID. Redirects to login if the JWT token is missing.
+/// </summary>
+
 public class TablesController : Controller
 {
     private readonly IRestaurantService _restaurantService;

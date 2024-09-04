@@ -1,6 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using RestaurantReservationSystem.Mvc.Models;
 
+
+/// <summary>
+    /// The CustomersController class manages customer-related operations such as listing, creating, editing, and deleting customers.
+    /// It uses IRestaurantService to interact with the backend and IHttpContextAccessor to manage session data.
+    /// Index: Retrieves and displays a list of customers. Redirects to login if the JWT token is missing.
+    /// Create (GET): Displays the form to create a new customer.
+    /// Create (POST): Adds a new customer if the model state is valid. Redirects to login if the JWT token is missing.
+    /// Edit (GET): Retrieves and displays the customer details for editing. Redirects to login if the JWT token is missing.
+    /// Edit (POST): Updates the customer details if the model state is valid. Redirects to login if the JWT token is missing.
+    /// Delete: Deletes a customer by their ID. Redirects to login if the JWT token is missing.
+/// </summary>
+
 public class CustomersController : Controller
 {
     private readonly IRestaurantService _restaurantService;

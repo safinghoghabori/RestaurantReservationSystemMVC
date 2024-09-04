@@ -3,6 +3,14 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
+/// <summary>
+    /// The AccountController class handles user authentication, including login and logout operations. 
+    /// It uses IHttpClientFactory to make HTTP requests and IHttpContextAccessor to manage session data. 
+    /// Login (GET): Displays the login view.
+    /// Login (POST): Authenticates the user by sending a login request to the API. If successful, stores the JWT in the session and redirects to the home page. Otherwise, displays an error message.
+    /// Logout: Clears the session and redirects to the login view.
+/// </summary>
+
 public class AccountController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;

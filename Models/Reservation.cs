@@ -1,3 +1,7 @@
+/// <summary>
+    /// Represents a reservation with properties for ID, date and time, customer ID, and table ID.
+/// </summary>
+
 namespace RestaurantReservationSystem.Mvc.Models
 {
     public class Reservation
