@@ -1,5 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
+/// <summary>
+    /// The Table class represents a table in the restaurant with properties for ID, capacity, cost, and reservation status. 
+    /// The VipTable class inherits from Table and adds a special service property, 
+    /// while the StandardTable class also inherits from Table and includes a property indicating if it is near a window.
+/// </summary>
+
 namespace RestaurantReservationSystem.Mvc.Models
 {
     public class Table

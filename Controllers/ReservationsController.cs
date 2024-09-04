@@ -2,6 +2,17 @@ using Microsoft.AspNetCore.Mvc;
 using RestaurantReservationSystem.Mvc.Models;
 using System.Threading.Tasks;
 
+/// <summary>
+    /// The ReservationsController class manages reservation-related operations such as listing, creating, editing, and deleting reservations.
+    /// It uses IRestaurantService to interact with the backend and IHttpContextAccessor to manage session data. 
+    /// Index: Retrieves and displays a list of reservations. Redirects to login if the JWT token is missing.
+    /// Create (GET): Displays the form to create a new reservation. Redirects to login if the JWT token is missing.
+    /// Create (POST): Adds a new reservation if the model state is valid. Redirects to login if the JWT token is missing.
+    /// Edit (GET): Retrieves and displays the reservation details for editing. Redirects to login if the JWT token is missing.
+    /// Edit (POST): Updates the reservation details if the model state is valid. Redirects to login if the JWT token is missing.
+    /// Delete: Deletes a reservation by its ID. Redirects to login if the JWT token is missing.
+/// </summary>
+
 namespace RestaurantReservationSystem.Mvc.Controllers
 {
     public class ReservationsController : Controller

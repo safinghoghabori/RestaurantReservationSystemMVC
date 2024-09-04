@@ -2,6 +2,32 @@ using RestaurantReservationSystem.Mvc.Models;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
+/// <summary>
+    /// The RestaurantService class provides methods to interact with a restaurant's API.
+    /// It supports operations for managing customers, tables, and reservations.
+    /// The class uses an HttpClient to send HTTP requests and includes methods for adding,
+    /// updating, retrieving, and deleting entities. Authorization headers are managed to
+    /// ensure secure communication with the API.
+    ///
+/// Methods:
+    /// - AddAuthorizationHeader: Adds the authorization header to the HTTP client.
+    /// - GetCustomersAsync: Retrieves the list of customers.
+    /// - GetCustomerById: Retrieves a customer by their ID.
+    /// - GetTablesAsync: Retrieves the list of tables.
+    /// - AddCustomerAsync: Adds a new customer.
+    /// - UpdateCustomerAsync: Updates an existing customer.
+    /// - DeleteCustomerAsync: Deletes a customer by their ID.
+    /// - AddTableAsync: Adds a new table.
+    /// - GetTableById: Retrieves a table by its ID.
+    /// - UpdateTable: Updates an existing table.
+    /// - DeleteTable: Deletes a table by its ID.
+    /// - GetReservationsAsync: Retrieves the list of reservations.
+    /// - GetReservationById: Retrieves a reservation by its ID.
+    /// - AddReservationAsync: Adds a new reservation.
+    /// - UpdateReservationAsync: Updates an existing reservation.
+    /// - DeleteReservationAsync: Deletes a reservation by its ID.
+/// </summary>
+
 public class RestaurantService : IRestaurantService
 {
     private readonly HttpClient _httpClient;
