@@ -1,0 +1,100 @@
+@using RestaurantReservationSystem.Mvc.Models;
+
+@{
+    ViewData["Title"] = "Edit Reservation";
+}
+@model Reservation
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    fieldset {
+        border: none;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="datetime-local"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    div {
+        margin-bottom: 15px;
+    }
+</style>
+
+<form action="~/Reservations/Edit" method="post">
+    <fieldset>
+        <div>
+            <label>Reservation Id</label>
+            <input type="number" asp-for="ReservationId" readonly>
+        </div>
+        <div>
+            <label>Date and Time</label>
+            <input type="datetime-local" asp-for="DateTime" value="@Model.DateTime.ToString("yyyy-MM-ddTHH:mm")">
+        </div>
+        <div>
+            <label>Customer</label>
+            <select asp-for="CustomerId">
+                @foreach (var customer in (IEnumerable<Customer>)ViewBag.Customers)
+                {
+                    <option value="@customer.CustomerId" selected=@(customer.CustomerId == Model.CustomerId ?
+                    "selected" : "")>@customer.Name</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label>Table</label>
+            <select asp-for="TableId">
+                @foreach (var table in (IEnumerable<Table>)ViewBag.Tables)
+                {
+                    <option value="@table.TableId" selected=@(table.TableId == Model.TableId ? "selected" : "")>Table
+                        @table.TableId</option>
+                }
+            </select>
+        </div>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </fieldset>
+</form>

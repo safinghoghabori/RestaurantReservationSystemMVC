@@ -1,0 +1,100 @@
+@using RestaurantReservationSystem.Mvc.Models;
+
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+@model Reservation
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    fieldset {
+        border: none;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="datetime-local"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    div {
+        margin-bottom: 15px;
+    }
+</style>
+
+<form action="~/Reservations/Create" method="post">
+    <fieldset>
+        <div>
+            <label>Reservation Id</label>
+            <input type="number" asp-for="ReservationId">
+        </div>
+        <div>
+            <label>Date and Time</label>
+            <input type="datetime-local" asp-for="DateTime">
+        </div>
+        <div>
+            <label>Customer</label>
+            <select asp-for="CustomerId">
+                @* Assuming you have a list of customers in the ViewBag *@
+                @foreach (var customer in ViewBag.Customers)
+                {
+                    <option value="@customer.CustomerId">@customer.Name</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label>Table</label>
+            <select asp-for="TableId">
+                @* Assuming you have a list of tables in the ViewBag *@
+                @foreach (var table in ViewBag.Tables)
+                {
+                    <option value="@table.TableId">Table @table.TableId</option>
+                }
+            </select>
+        </div>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </fieldset>
+</form>

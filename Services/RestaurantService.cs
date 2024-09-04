@@ -19,6 +19,7 @@ public class RestaurantService : IRestaurantService
         }
     }
 
+    // Customer-related methods
     public async Task<List<Customer>> GetCustomersAsync(string token)
     {
         AddAuthorizationHeader(token);
@@ -30,14 +31,7 @@ public class RestaurantService : IRestaurantService
     public async Task<Customer> GetCustomerById(int id, string token)
     {
         var customers = await GetCustomersAsync(token);
-        return customers.Where(customer => customer.CustomerId == id).FirstOrDefault();
-    }
-
-    public async Task UpdateCustomerAsync(Customer customer, string token)
-    {
-        AddAuthorizationHeader(token);
-        var response = await _httpClient.PutAsJsonAsync($"restaurant/customers/{customer.CustomerId}", customer);
-        response.EnsureSuccessStatusCode();
+        return customers.Where(customers => customers.CustomerId == id).FirstOrDefault();
     }
 
     public async Task<List<Table>> GetTablesAsync(string token)
@@ -47,14 +41,6 @@ public class RestaurantService : IRestaurantService
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<List<Table>>();
     }
-
-    public async Task<List<Reservation>> GetReservationsAsync()
-    {
-        var response = await _httpClient.GetAsync("restaurant/reservations");
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<List<Reservation>>();
-    }
-
     public async Task AddCustomerAsync(Customer customer, string token)
     {
         AddAuthorizationHeader(token);
@@ -62,6 +48,21 @@ public class RestaurantService : IRestaurantService
         response.EnsureSuccessStatusCode();
     }
 
+    public async Task UpdateCustomerAsync(Customer customer, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.PutAsJsonAsync($"restaurant/customers/{customer.CustomerId}", customer);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task DeleteCustomerAsync(int id, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.DeleteAsync($"restaurant/customers/{id}");
+        response.EnsureSuccessStatusCode();
+    }
+
+    // Table-related methods
     public async Task AddTableAsync(string token, Table table)
     {
         AddAuthorizationHeader(token);
@@ -87,15 +88,41 @@ public class RestaurantService : IRestaurantService
         await _httpClient.DeleteAsync($"restaurant/tables/{id}");
     }
 
-    public async Task MakeReservationAsync(Reservation reservation)
+    // Reservation-related methods
+    public async Task<List<Reservation>> GetReservationsAsync(string token)
     {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.GetAsync("restaurant/reservations");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<Reservation>>();
+    }
+
+    public async Task<Reservation> GetReservationById(int id, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.GetAsync($"restaurant/reservations/{id}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<Reservation>();
+    }
+
+    public async Task AddReservationAsync(Reservation reservation, string token)
+    {
+        AddAuthorizationHeader(token);
         var response = await _httpClient.PostAsJsonAsync("restaurant/reservations", reservation);
         response.EnsureSuccessStatusCode();
     }
-    public async Task DeleteCustomerAsync(int id, string token)
+
+    public async Task UpdateReservationAsync(Reservation reservation, string token)
     {
         AddAuthorizationHeader(token);
-        var response = await _httpClient.DeleteAsync($"restaurant/customers/{id}");
+        var response = await _httpClient.PutAsJsonAsync($"restaurant/reservations/{reservation.ReservationId}", reservation);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task DeleteReservationAsync(int id, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.DeleteAsync($"restaurant/reservations/{id}");
         response.EnsureSuccessStatusCode();
     }
 }
