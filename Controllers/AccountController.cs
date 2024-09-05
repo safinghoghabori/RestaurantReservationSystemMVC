@@ -3,6 +3,8 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 public class AccountController : Controller
 {
@@ -39,8 +41,19 @@ public class AccountController : Controller
             var jwt = JsonSerializer.Deserialize<JsonElement>(responseContent)
                         .GetProperty("token").GetString();
 
+            var tokenHandler = new JwtSecurityTokenHandler();
+            // Parse the JWT token
+            var jwtToken = tokenHandler.ReadJwtToken(jwt);
+
+            // Get claims from the token
+            var claims = jwtToken.Claims;
+
+            // Retrieve roles or any other claims
+            var loggedInUserRole = claims.FirstOrDefault(c => c.Type == "Role").Value;
+
             // Save the JWT in the session
             _httpContextAccessor.HttpContext.Session.SetString("JwtToken", jwt);
+            _httpContextAccessor.HttpContext.Session.SetString("LoggedInUserRole", loggedInUserRole);
 
             return RedirectToAction("Home", "Home");
         }
