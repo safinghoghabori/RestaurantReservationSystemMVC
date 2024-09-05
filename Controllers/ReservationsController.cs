@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RestaurantReservationSystem.Mvc.Models;
+using RestaurantReservationSystemMVC.Exceptions;
 using System.Threading.Tasks;
 
 namespace RestaurantReservationSystem.Mvc.Controllers
@@ -51,8 +52,15 @@ namespace RestaurantReservationSystem.Mvc.Controllers
 
             if (ModelState.IsValid)
             {
-                await _restaurantService.AddReservationAsync(reservation, token);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _restaurantService.AddReservationAsync(reservation, token);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (ReservationException ex)
+                {
+                    ModelState.AddModelError("ApiError", ex.Message);
+                }
             }
 
             ViewBag.Customers = await _restaurantService.GetCustomersAsync(token);

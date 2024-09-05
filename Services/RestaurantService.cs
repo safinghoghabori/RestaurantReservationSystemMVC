@@ -1,6 +1,10 @@
 using RestaurantReservationSystem.Mvc.Models;
+using RestaurantReservationSystemMVC.Models;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using RestaurantReservationSystemMVC.Exceptions;
 
 public class RestaurantService : IRestaurantService
 {
@@ -108,7 +112,12 @@ public class RestaurantService : IRestaurantService
     {
         AddAuthorizationHeader(token);
         var response = await _httpClient.PostAsJsonAsync("restaurant/reservations", reservation);
-        response.EnsureSuccessStatusCode();
+        
+        if(!response.IsSuccessStatusCode)
+        {
+            var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+            throw new ReservationException(errorResponse.Error);
+        }
     }
 
     public async Task UpdateReservationAsync(Reservation reservation, string token)

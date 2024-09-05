@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -21,24 +22,16 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(Login model)
+    public async Task<IActionResult> Login(Login user)
     {
         if (!ModelState.IsValid)
         {
-            return View(model);
+            return View(user);
         }
 
         var client = _httpClientFactory.CreateClient("RestaurantApi");
 
-        var loginRequest = new
-        {
-            Username = model.Username,
-            Password = model.Password
-        };
-
-        var content = new StringContent(JsonSerializer.Serialize(loginRequest), Encoding.UTF8, "application/json");
-
-        var response = await client.PostAsync("auth/login", content);
+        var response = await client.PostAsJsonAsync("auth/login", user);
 
         if (response.IsSuccessStatusCode)
         {
@@ -52,8 +45,16 @@ public class AccountController : Controller
             return RedirectToAction("Home", "Home");
         }
 
-        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-        return View(model);
+        if (response.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            ModelState.AddModelError("ApiError", "Invalid credentials. Please try again.");
+        }
+        else
+        {
+            ModelState.AddModelError("ApiError", "An error occurred during login. Please try again.");
+        }
+
+        return View(user);
     }
 
     [HttpPost]
