@@ -34,13 +34,12 @@ internal class Program
             app.UseHsts();
         }
 
+        app.UseRouting();
+        app.UseSession();
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-        app.UseSession();
-
-        app.UseRouting();
-
-        app.UseAuthorization();
 
         app.MapControllerRoute(
             name: "default",
