@@ -18,24 +18,35 @@
             <h1 class="display-4 mb-4">Welcome to the Restaurant Management System</h1>
 
             <div class="row g-3 justify-content-center mt-5">
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <a href="@Url.Action("Create", "Tables")" class="btn btn-primary btn-lg w-100">Add Table</a>
-                </div>
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <a href="@Url.Action("Index", "Tables")" class="btn btn-primary btn-lg w-100">View Tables</a>
-                </div>
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <a href="@Url.Action("Create", "Customers")" class="btn btn-success btn-lg w-100">Add Customer</a>
-                </div>
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <a href="@Url.Action("Index", "Customers")" class="btn btn-success btn-lg w-100">View Customers</a>
-                </div>
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <a href="@Url.Action("Create", "Reservations")" class="btn btn-warning btn-lg w-100">Add Reservation</a>
-                </div>
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <a href="@Url.Action("Index", "Reservations")" class="btn btn-warning btn-lg w-100">View Reservations</a>
-                </div>
+                <!-- If the user is a Restaurant Owner -->
+                @if (ViewBag.LoggedInUserRole == "RestaurantOwner")
+                { 
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Create", "Tables")" class="btn btn-primary btn-lg w-100">Add Table</a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Create", "Customers")" class="btn btn-success btn-lg w-100">Add Customer</a>
+                    </div>
+                }
+
+                <!-- If the user is either a Restaurant Owner or a Customer -->
+                @if (ViewBag.LoggedInUserRole == "RestaurantOwner" || ViewBag.LoggedInUserRole == "Customer")
+                {
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Index", "Tables")" class="btn btn-primary btn-lg w-100">View Tables</a>
+                    </div>
+                
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Index", "Customers")" class="btn btn-success btn-lg w-100">View Customers</a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Create", "Reservations")" class="btn btn-warning btn-lg w-100">Add Reservation</a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Index", "Reservations")" class="btn btn-warning btn-lg w-100">View Reservations</a>
+                    </div>
+                 }
+
             </div>
         </div>
     </div>

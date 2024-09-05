@@ -23,10 +23,13 @@ public class HomeController : Controller
     public IActionResult Home()
     {
         var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+        var loggedInUserRole = _httpContextAccessor.HttpContext.Session.GetString("LoggedInUserRole");
         if (string.IsNullOrEmpty(token))
         {
             return RedirectToAction("Login", "Account");
         }
+        ViewBag.LoggedInUserRole = loggedInUserRole;
+
         return View();
     }
 
