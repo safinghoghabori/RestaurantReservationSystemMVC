@@ -4,20 +4,82 @@
     ViewData["Title"] = "Tables Data";
 }
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+    }
+
+    table {
+        width: 80%;
+        margin: 50px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-primary {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+    }
+
+    .btn-primary:hover {
+        background-color: #45a049;
+    }
+</style>
+
 <button type="submit" class="btn btn-primary mb-3" onclick="handleAddTable()">Add Table</button>
 
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Capacity</th>
-            <th>Cost</th>
-            <th>Is table reserved?</th>
-            <th colspan="2"></th>
+            <th style="background-color: #4CAF50; color: white;">Id</th>
+            <th style="background-color: #4CAF50; color: white;">Capacity</th>
+            <th style="background-color: #4CAF50; color: white;">Cost</th>
+            <th style="background-color: #4CAF50; color: white;">Is table reserved?</th>
+            <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
         </tr>
     </thead>
     <tbody>
-        @foreach(Table table in Model)
+        @foreach (Table table in Model)
         {
             <tr>
                 <td>@table.TableId</td>
@@ -36,4 +98,3 @@
         window.location.href = '@Url.Action("Create", "Tables")';
     }
 </script>
-    

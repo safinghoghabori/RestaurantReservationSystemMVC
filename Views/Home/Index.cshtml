@@ -2,30 +2,93 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    .text-center {
-        height: 75vh;
-    }
-    .login-div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 500px;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="text-center">
-    <marquee><h1 class="display-4">Welcome</h1></marquee>
-    
-    <div class="login-div">
-        <button type="button" class="btn btn-primary btn-lg" onclick="handleLoginClick()">Login</button>
-        <button type="button" class="btn btn-secondary btn-lg mt-4">Sign up</button>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            height: 100vh;
+            color: #fff;
+            /* Ensures text is readable on the background image */
+        }
+
+        #container1 {
+
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Dark overlay for better text visibility */
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            /* Adjust as needed */
+            margin: 0 auto;
+            /* Center horizontally */
+            height: auto;
+            margin-top: 100px;
+        }
+
+        .text-center {
+            height: 75vh;
+            /* Adjusted to fit better within the view */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .login-div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            /* Adds space between buttons */
+        }
+
+        h1 {
+            margin: 0 0 2rem 0;
+            /* Removes default margin */
+            font-size: 2.5rem;
+            /* Adjust font size as needed */
+        }
+
+        .btn-lg {
+            width: 150px;
+        }
+        #container1{
+            width: 50%;
+            height: 50%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text-center" id="container1">
+        <h1 class="display-4">Welcome to Restaurant Management</h1>
+
+        <div class="login-div">
+            <button type="button" class="btn btn-primary btn-lg" onclick="handleLoginClick()">Login</button>
+            <button type="button" class="btn btn-secondary btn-lg mt-4">Sign Up</button>
+        </div>
     </div>
-</div>
 
-<script>
-    const handleLoginClick = () => {
-        window.location.href = '@Url.Action("Login", "Account")';
-    }
-</script>
+    <script>
+        const handleLoginClick = () => {
+            window.location.href = '@Url.Action("Login", "Account")';
+        }
+    </script>
+</body>
+
+</html>
