@@ -10,7 +10,7 @@ internal class Program
 
         builder.Services.AddHttpClient("RestaurantApi", client =>
         {
-            client.BaseAddress = new Uri("https://localhost:7048/api/");
+            client.BaseAddress = new Uri("http://localhost:5106/api/");
         });
 
         builder.Services.AddScoped<IRestaurantService, RestaurantService>();
@@ -34,13 +34,12 @@ internal class Program
             app.UseHsts();
         }
 
+        app.UseRouting();
+        app.UseSession();
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-        app.UseSession();
-
-        app.UseRouting();
-
-        app.UseAuthorization();
 
         app.MapControllerRoute(
             name: "default",
