@@ -15,10 +15,12 @@ public class TablesController : Controller
     public async Task<IActionResult> Index()
     {
         var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+        var loggedInUserRole = _httpContextAccessor.HttpContext.Session.GetString("LoggedInUserRole");
         if (string.IsNullOrEmpty(token))
         {
             return RedirectToAction(nameof(Login), "Account");
         }
+        ViewBag.LoggedInUserRole = loggedInUserRole;
 
         var tables = await _restaurantService.GetTablesAsync(token);
         return View(tables);
