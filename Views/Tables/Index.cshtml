@@ -1,4 +1,5 @@
 @using RestaurantReservationSystem.Mvc.Models;
+@using RestaurantReservationSystemMVC.Enums;
 @model IEnumerable<Table>
 @{
     ViewData["Title"] = "Tables Data";
@@ -66,7 +67,10 @@
     }
 </style>
 
-<button type="submit" class="btn btn-primary mb-3" onclick="handleAddTable()">Add Table</button>
+@if (ViewBag.LoggedInUserRole != UserRoles.Customer.ToString())
+{
+    <button type="submit" class="btn btn-primary mb-3" onclick="handleAddTable()">Add Table</button>
+}
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -86,8 +90,12 @@
                 <td>@table.Capacity</td>
                 <td>@table.Cost</td>
                 <td>@(table.IsReserved ? "Yes" : "No")</td>
-                <td><a asp-action="Update" asp-route-id="@table.TableId">Edit</a></td>
-                <td><a asp-action="Delete" asp-route-id="@table.TableId">Delete</a></td>
+
+                @if (ViewBag.LoggedInUserRole != UserRoles.Customer.ToString())
+                {
+                    <td><a asp-action="Update" asp-route-id="@table.TableId">Edit</a></td>
+                    <td><a asp-action="Delete" asp-route-id="@table.TableId">Delete</a></td>
+                }
             </tr>
         }
     </tbody>
