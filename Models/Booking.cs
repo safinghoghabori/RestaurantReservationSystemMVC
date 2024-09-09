@@ -20,7 +20,8 @@ public class Booking
     public string PhoneNumber { get; set; }
     [Required(ErrorMessage = "Email should be provided")]
     [EmailAddress(ErrorMessage = "Please enter a valid email address")]
-    public string Email{get;set;}
+    [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address")]
+    public string Email { get; set; }
 
     [Required(ErrorMessage = "Date and Time can't be empty.")]
     public DateTime? DateTime { get; set; }

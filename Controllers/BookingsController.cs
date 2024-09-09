@@ -85,7 +85,7 @@ public class BookingsController : Controller
             existingBooking.Name = booking.Name;
             existingBooking.Age = booking.Age;
             existingBooking.Gender = booking.Gender;
-            existingBooking.PhoneNumber=booking.PhoneNumber;
+            existingBooking.PhoneNumber = booking.PhoneNumber;
             existingBooking.DateTime = booking.DateTime;
             existingBooking.Capacity = booking.Capacity;
 
