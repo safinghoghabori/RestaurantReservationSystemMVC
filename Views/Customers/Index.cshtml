@@ -19,7 +19,8 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    th, td {
+    th,
+    td {
         padding: 12px 15px;
         border: 1px solid #ddd;
         text-align: left;
@@ -60,7 +61,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(Customer customer in Model)
+        @foreach (Customer customer in Model)
         {
             <tr>
                 <td>@customer.CustomerId</td>
@@ -75,3 +76,11 @@
     </tbody>
 </table>
 <a asp-action="Create" class="btn btn-primary">Create New Customer</a>
+<div>
+    <button type="button" onclick="goHome()">Go Home</button>
+</div>
+<script>
+    function goHome() {
+        window.location.href = '/Home/Home';
+    }
+</script>

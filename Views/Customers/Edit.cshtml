@@ -67,18 +67,22 @@
         <div>
             <label>Customer Id</label>
             <input type="number" asp-for="CustomerId" readonly>
+            <span class="validation-message" asp-validation-for="CustomerId"></span>
         </div>
         <div>
             <label>Name</label>
             <input type="text" asp-for="Name">
+            <span class="validation-message" asp-validation-for="Name"></span>
         </div>
         <div>
             <label>Phone Number</label>
             <input type="text" asp-for="PhoneNumber">
+            <span class="validation-message" asp-validation-for="PhoneNumber"></span>
         </div>
         <div>
             <label>Age</label>
             <input type="number" asp-for="Age">
+            <span class="validation-message" asp-validation-for="Age"></span>
         </div>
         <div>
             <label>Gender</label>
@@ -90,6 +94,13 @@
         </div>
         <div>
             <button type="submit">Save</button>
+            <button type="button" onclick="goHome()">Go Home</button>
         </div>
     </fieldset>
 </form>
+
+<script>
+    function goHome() {
+        window.location.href = '/Home/Home';
+    }
+</script>
