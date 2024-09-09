@@ -96,7 +96,7 @@ public class BookingsController : Controller
         return View(booking);
     }
 
-    [HttpPost]
+    [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
         var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
