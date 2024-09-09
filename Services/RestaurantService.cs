@@ -133,4 +133,39 @@ public class RestaurantService : IRestaurantService
         var response = await _httpClient.DeleteAsync($"restaurant/reservations/{id}");
         response.EnsureSuccessStatusCode();
     }
+    public async Task<List<Booking>> GetBookingsAsync(string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.GetAsync("restaurant/bookings");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<Booking>>();
+    }
+
+
+    public async Task<Booking> GetBookingById(int id, string token)
+    {
+        var bookings = await GetBookingsAsync(token);
+        return bookings.FirstOrDefault(b => b.Bid == id);
+    }
+
+    public async Task AddBookingAsync(Booking booking, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.PostAsJsonAsync("restaurant/bookings", booking);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task UpdateBookingAsync(Booking booking, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.PutAsJsonAsync($"restaurant/bookings/{booking.Bid}", booking);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task DeleteBookingAsync(int id, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.DeleteAsync($"restaurant/bookings/{id}");
+        response.EnsureSuccessStatusCode();
+    }
 }

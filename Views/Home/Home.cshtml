@@ -3,61 +3,60 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    body {
-        background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        color: #fff;
-        /* Ensure text is readable on the background image */
-    }
-
-    .container {
-        background-color: rgba(0, 0, 0, 0.4);
-        /*Darkoverlayforbettertextvisibility*/
-        padding-left: 1rem;
-        padding-right: 1rem;
-        border-radius: 8px;
-        margin-top: 100px;
-    }
-</style>
-
-<div class="text-center">
-    <h1 class="display-4 mb-4">Welcome to the Restaurant Management System</h1>
-
-    <div class="row g-3 justify-content-center mt-5">
-        <!-- If the user is a Restaurant Owner -->
-        @if (ViewBag.LoggedInUserRole == UserRoles.RestaurantOwner.ToString())
-        {
-            <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Create", "Tables")" class="btn btn-primary btn-lg w-100">Add Table</a>
-            </div>
-            <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Create", "Customers")" class="btn btn-success btn-lg w-100">Add Customer</a>
-            </div>
+    <style>
+        body {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            /* Ensure text is readable on the background image */
         }
 
-        <!-- If the user is either a Restaurant Owner or a Customer -->
-        @if (ViewBag.LoggedInUserRole == UserRoles.RestaurantOwner.ToString() || ViewBag.LoggedInUserRole ==
-        UserRoles.Customer.ToString())
-        {
-            <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Index", "Tables")" class="btn btn-primary btn-lg w-100">View Tables</a>
-            </div>
-
-            <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Index", "Customers")" class="btn btn-success btn-lg w-100">View Customers</a>
-            </div>
-            <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Create", "Reservations")" class="btn btn-warning btn-lg w-100">Add
-                    Reservation</a>
-            </div>
-            <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Index", "Reservations")" class="btn btn-warning btn-lg w-100">View
-                    Reservations</a>
-            </div>
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 2rem;
+            border-radius: 8px;
         }
+    </style>
 
-    </div>
+    <div class="container my-5">
+        <div class="text-center">
+            <h1 class="display-4 mb-4">Welcome to the Restaurant Management System</h1>
+
+            <div class="row g-3 justify-content-center mt-5">
+                <!-- If the user is a Restaurant Owner -->
+                @if (ViewBag.LoggedInUserRole == "RestaurantOwner")
+                { 
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Create", "Tables")" class="btn btn-primary btn-lg w-100">Add Table</a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Create", "Customers")" class="btn btn-success btn-lg w-100">Add Customer</a>
+                    </div>
+                }
+
+                <!-- If the user is either a Restaurant Owner or a Customer -->
+                @if (ViewBag.LoggedInUserRole == "RestaurantOwner" || ViewBag.LoggedInUserRole == "Customer")
+                {
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Index", "Tables")" class="btn btn-primary btn-lg w-100">View Tables</a>
+                    </div>
+                
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Index", "Customers")" class="btn btn-success btn-lg w-100">View Customers</a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Create", "Reservations")" class="btn btn-warning btn-lg w-100">Add Reservation</a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Index", "Reservations")" class="btn btn-warning btn-lg w-100">View Reservations</a>
+                    </div>
+                     <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Create", "Bookings")" class="btn btn-info btn-lg w-100">Add Bookings</a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Index", "Bookings")" class="btn btn-info btn-lg w-100">View Bookings</a>
+                    </div>
+                 }
 </div>

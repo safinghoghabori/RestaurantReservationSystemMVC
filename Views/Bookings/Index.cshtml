@@ -1,7 +1,7 @@
 @using RestaurantReservationSystem.Mvc.Models;
-@model IEnumerable<Reservation>
+@model IEnumerable<Booking>
 @{
-    ViewData["Title"] = "Reservations Data";
+    ViewData["Title"] = "Bookings Data";
 }
 
 <style>
@@ -52,28 +52,32 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th style="background-color: #4CAF50; color: white;">Reservation Id</th>
+            <th style="background-color: #4CAF50; color: white;">Id</th>
+            <th style="background-color: #4CAF50; color: white;">Name</th>
+            <th style="background-color: #4CAF50; color: white;">Age</th>
+            <th style="background-color: #4CAF50; color: white;">Gender</th>
             <th style="background-color: #4CAF50; color: white;">Date and Time</th>
-            <th style="background-color: #4CAF50; color: white;">Customer</th>
-            <th style="background-color: #4CAF50; color: white;">Table</th>
+            <th style="background-color: #4CAF50; color: white;">Capacity</th>
             <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Reservation reservation in Model)
+        @foreach (Booking booking in Model)
         {
             <tr>
-                <td>@reservation.ReservationId</td>
-                <td>@reservation.DateTime?.ToString("g")</td>
-                <td>@reservation.CustomerId</td>
-                <td>@reservation.TableId</td>
-                <td><a asp-action="Edit" asp-route-id="@reservation.ReservationId">Edit</a></td>
-                <td><a asp-action="Delete" asp-route-id="@reservation.ReservationId">Delete</a></td>
+                <td>@booking.Bid</td>
+                <td>@booking.Name</td>
+                <td>@booking.Age</td>
+                <td>@booking.Gender</td>
+                <td>@booking.DateTime</td>
+                <td>@booking.Capacity</td>
+                <td><a asp-action="Edit" asp-route-id="@booking.Bid">Edit</a></td>
+                <td><a asp-action="Delete" asp-route-id="@booking.Bid">Cancel</a></td>
             </tr>
         }
     </tbody>
 </table>
-<a asp-action="Create" class="btn btn-primary">Create New Reservation</a>
+<a asp-action="Create" class="btn btn-primary">Create New Booking</a>
 <div>
     <button type="button" onclick="goHome()">Go Home</button>
 </div>
