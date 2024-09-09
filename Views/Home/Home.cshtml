@@ -5,59 +5,76 @@
 
 <style>
     body {
-        background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/62/Barbieri_-_ViaSophia25668.jpg');
+        background-image: url('https://m2-retail.com/cdn/shop/products/retro-bar-wooden-reception-desk-beauty-barber-shop-front-desk-m2-retail-2_800x800.jpg?v=1684396597');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
         color: #fff;
-        /* Ensure text is readable on the background image */
+        width: 100%;
+        height: 50vh;
     }
 
     .container {
-        background-color: rgba(0, 0, 0, 0.4);
-        /*Darkoverlayforbettertextvisibility*/
-        padding-left: 1rem;
-        padding-right: 1rem;
-        border-radius: 8px;
+        @* background-color: rgba(0, 0, 0, 0.6);
+        padding: 2rem;
+        border-radius: 8px; *@
         margin-top: 100px;
+    }
+
+    .text-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    .btn-lg {
+        width: 200px;
+        margin: 10px;
+    }
+
+    .main-heading {
+        color:hotpink;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
     }
 </style>
 
-<div class="text-center">
-    <h1 class="display-4 mb-4">Welcome to the Restaurant Management System</h1>
+<div class="text-center container">
+    <h1 class="main-heading">How can we HELP YOU</h1>
 
-    <div class="row g-3 justify-content-center mt-5">
+    <div class="row g-3 justify-content-center">
         <!-- If the user is a Restaurant Owner -->
         @if (ViewBag.LoggedInUserRole == UserRoles.RestaurantOwner.ToString())
         {
             <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Create", "Tables")" class="btn btn-primary btn-lg w-100">Add Table</a>
+                <a href="@Url.Action("Create", "Tables")" class="btn btn-primary btn-lg">Add Table</a>
             </div>
             <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Create", "Customers")" class="btn btn-success btn-lg w-100">Add Customer</a>
+                <a href="@Url.Action("Create", "Customers")" class="btn btn-success btn-lg">Add Customer</a>
             </div>
         }
 
         <!-- If the user is either a Restaurant Owner or a Customer -->
-        @if (ViewBag.LoggedInUserRole == UserRoles.RestaurantOwner.ToString() || ViewBag.LoggedInUserRole ==
-        UserRoles.Customer.ToString())
+        @if (ViewBag.LoggedInUserRole == UserRoles.RestaurantOwner.ToString() || ViewBag.LoggedInUserRole == UserRoles.Customer.ToString())
         {
             <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Index", "Tables")" class="btn btn-primary btn-lg w-100">View Tables</a>
+                <a href="@Url.Action("Index", "Tables")" class="btn btn-primary btn-lg">View Tables</a>
             </div>
 
             <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Index", "Customers")" class="btn btn-success btn-lg w-100">View Customers</a>
+                <a href="@Url.Action("Index", "Customers")" class="btn btn-success btn-lg">View Customers</a>
             </div>
             <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Create", "Reservations")" class="btn btn-warning btn-lg w-100">Add
-                    Reservation</a>
+                <a href="@Url.Action("Create", "Reservations")" class="btn btn-warning btn-lg">Add Reservation</a>
             </div>
             <div class="col-lg-6 col-md-12 mb-3">
-                <a href="@Url.Action("Index", "Reservations")" class="btn btn-warning btn-lg w-100">View
-                    Reservations</a>
+                <a href="@Url.Action("Index", "Reservations")" class="btn btn-warning btn-lg">View Reservations</a>
             </div>
         }
-
     </div>
 </div>
