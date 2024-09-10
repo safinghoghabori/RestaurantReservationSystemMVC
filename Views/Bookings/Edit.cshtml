@@ -1,0 +1,118 @@
+@using RestaurantReservationSystem.Mvc.Models;
+
+@{
+    ViewData["Title"] = "Booking Data";
+}
+@model Booking
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        color: #333;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    fieldset {
+        border: none;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="datetime-local"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    div {
+        margin-bottom: 15px;
+    }
+</style>
+
+<form asp-action="Edit" method="post">
+    <fieldset>
+        <div>
+            <label>Name</label>
+            <input type="text" asp-for="Name" placeholder="Enter your full name">
+            <span class="validation-message" asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label>Age</label>
+            <input type="number" asp-for="Age" placeholder="Enter your age">
+            <span class="validation-message" asp-validation-for="Age"></span>
+        </div>
+        <div>
+            <label>Gender</label>
+            <select asp-for="Gender">
+                <option value="" disabled selected>Select your gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div>
+            <label>Phone Number</label>
+            <input type="text" asp-for="PhoneNumber" placeholder="Enter your Phone Number">
+            <span class="validation-message" asp-validation-for="PhoneNumber"></span>
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="text" asp-for="Email" placeholder="Enter your Email">
+            <span class="validation-message" asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label>Date and Time</label>
+            <input type="datetime-local" asp-for="DateTime" placeholder="Select date and time">
+            <span class="validation-message" asp-validation-for="DateTime"></span>
+        </div>
+        <div>
+            <label>Capacity</label>
+            <input type="number" asp-for="Capacity" placeholder="Enter number of people">
+            <span class="validation-message" asp-validation-for="Capacity"></span>
+        </div>
+        <div>
+            <button type="submit">Edit Now</button>
+            <button type="button" onclick="goHome()">Go Home</button>
+        </div>
+    </fieldset>
+</form>
+
+<script>
+    function goHome() {
+        window.location.href = '/Home/Home';
+    }
+</script>

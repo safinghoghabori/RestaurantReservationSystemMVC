@@ -1,4 +1,6 @@
 @using RestaurantReservationSystem.Mvc.Models;
+@using RestaurantReservationSystemMVC.Enums;
+
 @model IEnumerable<Booking>
 @{
     ViewData["Title"] = "Bookings Data";
@@ -47,37 +49,83 @@
     a:hover {
         text-decoration: underline;
     }
+
+    .btn-primary {
+        background-color: #4CAF50;
+        color: white;
+        padding: 5px 10px;
+        /* Reduced padding for smaller size */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        /* Reduced font size */
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+    }
+
+    .btn-primary:hover {
+        background-color: #45a049;
+    }
+
+    .no-bookings {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff0000;
+        margin-top: 50px;
+    }
 </style>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th style="background-color: #4CAF50; color: white;">Id</th>
-            <th style="background-color: #4CAF50; color: white;">Name</th>
-            <th style="background-color: #4CAF50; color: white;">Age</th>
-            <th style="background-color: #4CAF50; color: white;">Gender</th>
-            <th style="background-color: #4CAF50; color: white;">Date and Time</th>
-            <th style="background-color: #4CAF50; color: white;">Capacity</th>
-            <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Booking booking in Model)
-        {
+@if (!Model.Any())
+{
+    <p class="no-bookings">No bookings found</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <td>@booking.Bid</td>
-                <td>@booking.Name</td>
-                <td>@booking.Age</td>
-                <td>@booking.Gender</td>
-                <td>@booking.DateTime</td>
-                <td>@booking.Capacity</td>
-                <td><a asp-action="Edit" asp-route-id="@booking.Bid">Edit</a></td>
-                <td><a asp-action="Delete" asp-route-id="@booking.Bid">Cancel</a></td>
+                <th style="background-color: #4CAF50; color: white;">Id</th>
+                <th style="background-color: #4CAF50; color: white;">Name</th>
+                <th style="background-color: #4CAF50; color: white;">Age</th>
+                <th style="background-color: #4CAF50; color: white;">Gender</th>
+                <th style="background-color: #4CAF50; color: white;">Phone Number</th>
+                <th style="background-color: #4CAF50; color: white;">Email</th>
+                <th style="background-color: #4CAF50; color: white;">Date and Time</th>
+                <th style="background-color: #4CAF50; color: white;">Capacity</th>
+
             </tr>
-        }
-    </tbody>
-</table>
-<a asp-action="Create" class="btn btn-primary">Create New Booking</a>
+        </thead>
+        <tbody>
+            @foreach (Booking booking in Model)
+            {
+                <tr>
+                    <td>@booking.Bid</td>
+                    <td>@booking.Name</td>
+                    <td>@booking.Age</td>
+                    <td>@booking.Gender</td>
+                    <td>@booking.PhoneNumber</td>
+                    <td>@booking.Email</td>
+                    <td>@booking.DateTime</td>
+                    <td>@booking.Capacity</td>
+
+                    @if (ViewBag.LoggedInUserRole != UserRoles.RestaurantOwner.ToString())
+                    {
+                        <td><a asp-action="Edit" asp-route-id="@booking.Bid">Edit</a></td>
+                        <td><a asp-action="Delete" asp-route-id="@booking.Bid">Cancel</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <button type="button" onclick="goHome()">Go Home</button>
+    </div>
+}
+
 <div>
     <button type="button" onclick="goHome()">Go Home</button>
 </div>

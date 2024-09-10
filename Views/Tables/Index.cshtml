@@ -65,41 +65,56 @@
     .btn-primary:hover {
         background-color: #45a049;
     }
+
+    .no-tables {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff0000;
+        margin-top: 50px;
+    }
 </style>
 
-@if (ViewBag.LoggedInUserRole != UserRoles.Customer.ToString())
+@if (!Model.Any())
 {
-    <button type="submit" class="btn btn-primary mb-3" onclick="handleAddTable()">Add Table</button>
+    <p class="no-tables">No tables found</p>
 }
+else
+{
+    @if (ViewBag.LoggedInUserRole != UserRoles.Customer.ToString())
+    {
+        <button type="submit" class="btn btn-primary mb-3" onclick="handleAddTable()">Add Table</button>
+    }
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th style="background-color: #4CAF50; color: white;">Id</th>
-            <th style="background-color: #4CAF50; color: white;">Capacity</th>
-            <th style="background-color: #4CAF50; color: white;">Cost</th>
-            <th style="background-color: #4CAF50; color: white;">Is table reserved?</th>
-            <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Table table in Model)
-        {
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <td>@table.TableId</td>
-                <td>@table.Capacity</td>
-                <td>@table.Cost</td>
-                <td>@(table.IsReserved ? "Yes" : "No")</td>
-
-                @if (ViewBag.LoggedInUserRole != UserRoles.Customer.ToString())
-                {
-                    <td><a asp-action="Update" asp-route-id="@table.TableId">Edit</a></td>
-                    <td><a asp-action="Delete" asp-route-id="@table.TableId">Delete</a></td>
-                }
+                <th style="background-color: #4CAF50; color: white;">Id</th>
+                <th style="background-color: #4CAF50; color: white;">Capacity</th>
+                <th style="background-color: #4CAF50; color: white;">Cost</th>
+                <th style="background-color: #4CAF50; color: white;">Is table reserved?</th>
+                <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (Table table in Model)
+            {
+                <tr>
+                    <td>@table.TableId</td>
+                    <td>@table.Capacity</td>
+                    <td>@table.Cost</td>
+                    <td>@(table.IsReserved ? "Yes" : "No")</td>
+
+                    @if (ViewBag.LoggedInUserRole != UserRoles.Customer.ToString())
+                    {
+                        <td><a asp-action="Update" asp-route-id="@table.TableId">Edit</a></td>
+                        <td><a asp-action="Delete" asp-route-id="@table.TableId">Delete</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 <script>
     const handleAddTable = () => {

@@ -34,11 +34,6 @@
                     <div class="col-lg-6 col-md-12 mb-3">
                         <a href="@Url.Action("Create", "Customers")" class="btn btn-success btn-lg w-100">Add Customer</a>
                     </div>
-                }
-
-                <!-- If the user is either a Restaurant Owner or a Customer -->
-                @if (ViewBag.LoggedInUserRole ==  UserRoles.RestaurantOwner.ToString() || ViewBag.LoggedInUserRole == UserRoles.Customer.ToString())
-                {
                     <div class="col-lg-6 col-md-12 mb-3">
                         <a href="@Url.Action("Index", "Tables")" class="btn btn-primary btn-lg w-100">View Tables</a>
                     </div>
@@ -52,11 +47,19 @@
                     <div class="col-lg-6 col-md-12 mb-3">
                         <a href="@Url.Action("Index", "Reservations")" class="btn btn-warning btn-lg w-100">View Reservations</a>
                     </div>
-                     <div class="col-lg-6 col-md-12 mb-3">
+                    <div class="col-lg-6 col-md-12 mb-3">
+                        <a href="@Url.Action("Index", "Bookings")" class="btn btn-info btn-lg w-100">View Bookings</a>
+                    </div>
+                }
+
+                <!-- If the user is either a Restaurant Owner or a Customer -->
+                @if (ViewBag.LoggedInUserRole == UserRoles.Customer.ToString())
+                {
+                    <div class="col-lg-6 col-md-12 mb-3">
                         <a href="@Url.Action("Create", "Bookings")" class="btn btn-info btn-lg w-100">Add Bookings</a>
                     </div>
                     <div class="col-lg-6 col-md-12 mb-3">
                         <a href="@Url.Action("Index", "Bookings")" class="btn btn-info btn-lg w-100">View Bookings</a>
                     </div>
-                 }
+                }
 </div>

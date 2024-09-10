@@ -25,6 +25,7 @@ public interface IRestaurantService
 
     Task<List<Booking>> GetBookingsAsync(string token);
     Task<Booking> GetBookingById(int id, string token);
+    Task<Booking> GetBookingByEmail(string email, string token);
     Task AddBookingAsync(Booking booking, string token);
     Task UpdateBookingAsync(Booking booking, string token);
     Task DeleteBookingAsync(int id, string token);

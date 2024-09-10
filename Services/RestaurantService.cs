@@ -149,6 +149,12 @@ public class RestaurantService : IRestaurantService
         return bookings.FirstOrDefault(b => b.Bid == id);
     }
 
+    public async Task<Booking> GetBookingByEmail(string email, string token)
+    {
+        var bookings = await GetBookingsAsync(token);
+        return bookings.FirstOrDefault(b => b.Email == email);
+    }
+
     public async Task AddBookingAsync(Booking booking, string token)
     {
         AddAuthorizationHeader(token);

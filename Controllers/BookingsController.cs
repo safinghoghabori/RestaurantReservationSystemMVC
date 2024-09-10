@@ -16,10 +16,12 @@ public class BookingsController : Controller
     public async Task<IActionResult> Index()
     {
         var token = _httpContextAccessor.HttpContext.Session.GetString("JwtToken");
+        var loggedInUserRole = _httpContextAccessor.HttpContext.Session.GetString("LoggedInUserRole");
         if (string.IsNullOrEmpty(token))
         {
             return RedirectToAction("Login", "Account");
         }
+        ViewBag.LoggedInUserRole = loggedInUserRole;
 
         var bookings = await _restaurantService.GetBookingsAsync(token);
         return View(bookings);
@@ -76,7 +78,7 @@ public class BookingsController : Controller
 
         if (ModelState.IsValid)
         {
-            var existingBooking = await _restaurantService.GetBookingById(booking.Bid, token);
+            var existingBooking = await _restaurantService.GetBookingByEmail(booking.Email, token);
             if (existingBooking == null)
             {
                 return NotFound();
