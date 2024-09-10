@@ -133,4 +133,46 @@ public class RestaurantService : IRestaurantService
         var response = await _httpClient.DeleteAsync($"restaurant/reservations/{id}");
         response.EnsureSuccessStatusCode();
     }
+
+    // Booking-related methods
+    public async Task<List<Booking>> GetBookingsAsync(string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.GetAsync("booking");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<List<Booking>>();
+    }
+
+    public async Task<Booking> GetBookingById(int id, string token)
+    {
+        var bookings = await GetBookingsAsync(token);
+        return bookings.FirstOrDefault(b => b.Bid == id);
+    }
+
+    public async Task<Booking> GetBookingByEmail(string email, string token)
+    {
+        var bookings = await GetBookingsAsync(token);
+        return bookings.FirstOrDefault(b => b.Email == email);
+    }
+
+    public async Task AddBookingAsync(Booking booking, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.PostAsJsonAsync("booking", booking);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task UpdateBookingAsync(Booking booking, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.PutAsJsonAsync($"booking/{booking.Bid}", booking);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task DeleteBookingAsync(int id, string token)
+    {
+        AddAuthorizationHeader(token);
+        var response = await _httpClient.DeleteAsync($"booking/{id}");
+        response.EnsureSuccessStatusCode();
+    }
 }

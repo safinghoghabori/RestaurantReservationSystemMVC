@@ -22,6 +22,13 @@ public interface IRestaurantService
     Task AddReservationAsync(Reservation reservation, string token);
     Task UpdateReservationAsync(Reservation reservation, string token);
     Task DeleteReservationAsync(int id, string token);
+
+    Task<List<Booking>> GetBookingsAsync(string token);
+    Task<Booking> GetBookingById(int id, string token);
+    Task<Booking> GetBookingByEmail(string email, string token);
+    Task AddBookingAsync(Booking booking, string token);
+    Task UpdateBookingAsync(Booking booking, string token);
+    Task DeleteBookingAsync(int id, string token);
 }
 
 

@@ -7,6 +7,7 @@ namespace RestaurantReservationSystem.Mvc.Models
         [Required(ErrorMessage = "Table id cant be empty!")]
         public int? TableId { get; set; }
         [Required(ErrorMessage = "Capacity cant be empty!")]
+        [Range(1, 10, ErrorMessage = "Capacity must be between 1 and 10")]
         public int? Capacity { get; set; }
         [Required(ErrorMessage = "Cost cant be empty!")]
         public int? Cost { get; set; }

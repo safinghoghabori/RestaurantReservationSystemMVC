@@ -1,8 +1,9 @@
 @using RestaurantReservationSystem.Mvc.Models;
 @using RestaurantReservationSystemMVC.Enums;
-@model IEnumerable<Table>
+
+@model IEnumerable<Booking>
 @{
-    ViewData["Title"] = "Tables Data";
+    ViewData["Title"] = "Bookings Data";
 }
 
 <style>
@@ -52,11 +53,13 @@
     .btn-primary {
         background-color: #4CAF50;
         color: white;
-        padding: 10px 20px;
+        padding: 5px 10px;
+        /* Reduced padding for smaller size */
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 14px;
+        /* Reduced font size */
         margin: 20px auto;
         display: block;
         text-align: center;
@@ -66,7 +69,7 @@
         background-color: #45a049;
     }
 
-    .no-tables {
+    .no-bookings {
         text-align: center;
         font-size: 24px;
         font-weight: bold;
@@ -77,50 +80,52 @@
 
 @if (!Model.Any())
 {
-    <p class="no-tables">No tables found</p>
+    <p class="no-bookings">No bookings found</p>
 }
 else
 {
-    @if (ViewBag.LoggedInUserRole != UserRoles.Customer.ToString())
-    {
-        <button type="submit" class="btn btn-primary mb-3" onclick="handleAddTable()">Add Table</button>
-    }
-
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th style="background-color: #4CAF50; color: white;">Id</th>
+                <th style="background-color: #4CAF50; color: white;">Name</th>
+                <th style="background-color: #4CAF50; color: white;">Age</th>
+                <th style="background-color: #4CAF50; color: white;">Gender</th>
+                <th style="background-color: #4CAF50; color: white;">Phone Number</th>
+                <th style="background-color: #4CAF50; color: white;">Email</th>
+                <th style="background-color: #4CAF50; color: white;">Date and Time</th>
                 <th style="background-color: #4CAF50; color: white;">Capacity</th>
-                <th style="background-color: #4CAF50; color: white;">Cost</th>
-                <th style="background-color: #4CAF50; color: white;">Is table reserved?</th>
-                <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach (Table table in Model)
+            @foreach (Booking booking in Model)
             {
                 <tr>
-                    <td>@table.TableId</td>
-                    <td>@table.Capacity</td>
-                    <td>@table.Cost</td>
-                    <td>@(table.IsReserved ? "Yes" : "No")</td>
+                    <td>@booking.Bid</td>
+                    <td>@booking.Name</td>
+                    <td>@booking.Age</td>
+                    <td>@booking.Gender</td>
+                    <td>@booking.PhoneNumber</td>
+                    <td>@booking.Email</td>
+                    <td>@booking.DateTime</td>
+                    <td>@booking.Capacity</td>
 
-                    @if (ViewBag.LoggedInUserRole != UserRoles.Customer.ToString())
+                    @if (ViewBag.LoggedInUserRole != UserRoles.RestaurantOwner.ToString())
                     {
-                        <td><a asp-action="Update" asp-route-id="@table.TableId">Edit</a></td>
-                        <td><a asp-action="Delete" asp-route-id="@table.TableId">Delete</a></td>
+                        <td><a asp-action="Edit" asp-route-id="@booking.Bid">Edit</a></td>
+                        <td><a asp-action="Delete" asp-route-id="@booking.Bid">Cancel</a></td>
                     }
                 </tr>
             }
         </tbody>
     </table>
+
+    <div>
+        <button type="button" onclick="goHome()">Go Home</button>
+    </div>
 }
 
-<script>
-    const handleAddTable = () => {
-        window.location.href = '@Url.Action("Create", "Tables")';
-    }
-</script>
 <div>
     <button type="button" onclick="goHome()">Go Home</button>
 </div>

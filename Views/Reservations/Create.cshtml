@@ -99,14 +99,21 @@
         </div>
         <div>
             <button type="submit">Create</button>
+            <button type="button" onclick="goHome()">Go Home</button>
 
             @if (ViewData.ModelState.ContainsKey("ApiError"))
             {
                 <div class="alert alert-danger mt-2" role="alert">
-                        <li>@ViewData.ModelState["ApiError"].Errors.FirstOrDefault()?.ErrorMessage</li>
+                    <li>@ViewData.ModelState["ApiError"].Errors.FirstOrDefault()?.ErrorMessage</li>
                 </div>
             }
 
         </div>
     </fieldset>
 </form>
+
+<script>
+    function goHome() {
+        window.location.href = '/Home/Home';
+    }
+</script>

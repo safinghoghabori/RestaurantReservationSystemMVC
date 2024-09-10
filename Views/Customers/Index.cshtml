@@ -19,7 +19,8 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    th, td {
+    th,
+    td {
         padding: 12px 15px;
         border: 1px solid #ddd;
         text-align: left;
@@ -46,32 +47,59 @@
     a:hover {
         text-decoration: underline;
     }
+
+    .no-customers {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff0000;
+        margin-top: 50px;
+    }
 </style>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th style="background-color: #4CAF50; color: white;">Id</th>
-            <th style="background-color: #4CAF50; color: white;">Name</th>
-            <th style="background-color: #4CAF50; color: white;">Phone Number</th>
-            <th style="background-color: #4CAF50; color: white;">Age</th>
-            <th style="background-color: #4CAF50; color: white;">Gender</th>
-            <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(Customer customer in Model)
-        {
+@if (!Model.Any())
+{
+    <p class="no-customers">No customers found</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <td>@customer.CustomerId</td>
-                <td>@customer.Name</td>
-                <td>@customer.PhoneNumber</td>
-                <td>@customer.Age</td>
-                <td>@customer.Gender</td>
-                <td><a asp-action="Edit" asp-route-id="@customer.CustomerId">Edit</a></td>
-                <td><a asp-action="Delete" asp-route-id="@customer.CustomerId">Delete</a></td>
+                <th style="background-color: #4CAF50; color: white;">Id</th>
+                <th style="background-color: #4CAF50; color: white;">Name</th>
+                <th style="background-color: #4CAF50; color: white;">Phone Number</th>
+                <th style="background-color: #4CAF50; color: white;">Age</th>
+                <th style="background-color: #4CAF50; color: white;">Gender</th>
+                <th style="background-color: #4CAF50; color: white;" colspan="2"></th>
             </tr>
-        }
-    </tbody>
-</table>
-<a asp-action="Create" class="btn btn-primary">Create New Customer</a>
+        </thead>
+        <tbody>
+            @foreach (Customer customer in Model)
+            {
+                <tr>
+                    <td>@customer.CustomerId</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.PhoneNumber</td>
+                    <td>@customer.Age</td>
+                    <td>@customer.Gender</td>
+                    <td><a asp-action="Edit" asp-route-id="@customer.CustomerId">Edit</a></td>
+                    <td><a asp-action="Delete" asp-route-id="@customer.CustomerId">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create" class="btn btn-primary">Create New Customer</a>
+    <div>
+        <button type="button" onclick="goHome()">Go Home</button>
+    </div>
+}
+
+<div>
+    <button type="button" onclick="goHome()">Go Home</button>
+</div>
+<script>
+    function goHome() {
+        window.location.href = '/Home/Home';
+    }
+</script>
