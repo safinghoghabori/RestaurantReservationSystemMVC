@@ -73,6 +73,17 @@
         color: #ff0000;
         margin-top: 50px;
     }
+
+    #gobackt{
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+}
+
 </style>
 
 @if (!Model.Any())
@@ -122,7 +133,7 @@ else
     }
 </script>
 <div>
-    <button type="button" onclick="goHome()">Go Home</button>
+    <button type="button" onclick="goHome()" id="gobackt">Go Home</button>
 </div>
 <script>
     function goHome() {
